@@ -4,7 +4,7 @@ Agradecemos o seu interesse em contribuir para o **Sistema de Gestão de Produto
 
 ---
 
-## 🍴 Como Fazer Fork e Rodar o Projeto
+## ⚡ Como Fazer Fork e Rodar em 1 Clique
 
 ### 1. Fazer o Fork no GitHub
 1. Acesse o repositório principal: [https://github.com/GabrielFSilva01/SDDcomCepein](https://github.com/GabrielFSilva01/SDDcomCepein).
@@ -17,20 +17,18 @@ git clone https://github.com/SEU_USUARIO/SDDcomCepein.git
 cd SDDcomCepein
 ```
 
-### 3. Configurar e Executar o Backend (Java 21 / Spring Boot)
-```bash
-cd backend
-./mvnw spring-boot:run
-```
-*O backend estará rodando em `http://localhost:8080` com o banco de dados local SQLite.*
+### 3. Execução Automática em 1 Clique
+- **Windows**: Dê 2 cliques no arquivo `start.bat` ou execute `.\start.bat` no terminal.
+- **Linux / macOS**: Execute `bash start.sh` no terminal.
 
-### 4. Configurar e Executar o Frontend (React / Vite)
-```bash
-cd frontend
-npm install
-npm run dev
-```
-*O frontend estará acessível em `http://localhost:5173`.*
+O script cuidará de instalar as dependências do frontend e subir ambos os servidores (Backend na porta 8080 e Frontend na porta 5173).
+
+---
+
+## 🔑 Credenciais para Login
+
+- **Usuário**: `admin`
+- **Senha**: `admin123`
 
 ---
 
@@ -40,7 +38,7 @@ npm run dev
    ```bash
    git checkout -b minha-nova-feature
    ```
-2. Realize as alterações mantendo os padrões de código e a **Constituição do Projeto**.
+2. Realize as alterações mantendo os padrões de código e a **Constituição do Projeto** (`.specify/memory/constitution.md`).
 3. Adicione e commite suas alterações com mensagens claras e descritivas em português:
    ```bash
    git commit -m "feat(modulo): minha nova melhoria"

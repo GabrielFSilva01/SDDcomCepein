@@ -13,7 +13,7 @@ Aplicação desenvolvida para gerenciar **Produtos**, **Fornecedores** e o relac
 
 ## 🔑 Credenciais para Testes Rápido
 
-Para facilitar os testes de homologação rápida e validação de permissões RBAC:
+Para facilitar a homologação rápida do sistema e validação de permissões RBAC:
 
 - **Usuário**: `admin`
 - **Senha**: `admin123`
@@ -21,28 +21,26 @@ Para facilitar os testes de homologação rápida e validação de permissões R
 
 ---
 
-## 🍴 Como Fazer Fork e Executar o Projeto
+## 🚀 Como Executar o Projeto (Fork ou Clone)
 
-Qualquer pessoa pode fazer o **fork** deste repositório e executar a aplicação localmente de forma simples:
+### 1. Backend (Spring Boot 3.2.3 / Java 21)
+Navegue até a pasta `backend/` e inicie o servidor:
+```bash
+cd backend
+mvn spring-boot:run
+```
+- **Porta**: `8080` ([http://localhost:8080](http://localhost:8080))
+- **Seed Automático**: Ao iniciar pela primeira vez, o backend popula automaticamente dados de demonstração no banco de dados SQLite local.
 
-1. **Faça o Fork** clicando no botão `Fork` no topo superior direito desta página no GitHub.
-2. **Clone seu repositório forkado**:
-   ```bash
-   git clone https://github.com/SEU_USUARIO/SDDcomCepein.git
-   cd SDDcomCepein
-   ```
-3. **Execute o Backend (Spring Boot / Java 21)**:
-   ```bash
-   cd backend
-   ./mvnw spring-boot:run
-   ```
-4. **Execute o Frontend (React / Vite)**:
-   ```bash
-   cd frontend
-   npm install
-   npm run dev
-   ```
-Para mais detalhes sobre contribuição, leia o guia em [`CONTRIBUTING.md`](CONTRIBUTING.md).
+### 2. Frontend (React 18 / Vite)
+Navegue até a pasta `frontend/`, instale as dependências e inicie o ambiente de desenvolvimento:
+```bash
+cd frontend
+npm install
+npm run dev
+```
+- **Porta**: `5173` ([http://localhost:5173](http://localhost:5173))
+- **Host**: Configurado para `0.0.0.0:5173` para acesso local e via rede sem conflitos de portas.
 
 ---
 
@@ -53,12 +51,15 @@ O sistema adota uma arquitetura Cliente-Servidor desacoplada:
 1. **Backend (Java 21 / Spring Boot 3.2.3)**:
    - **API RESTful Stateless**: Exposições de endpoints REST padronizados (`/api/fornecedores`, `/api/produtos`, `/api/produtos/{id_produto}/fornecedores/{id_fornecedor}`).
    - **Mapeamento JPA Relacional N:N**: Mapeamento explícito de 3 entidades JPA (`Fornecedor`, `Produto`, `ProdutoFornecedor`) utilizando chave primária composta `@EmbeddedId` (`ProdutoFornecedorId`).
-   - **Banco de Dados Embarcado (SQLite / H2 File)**: Banco de dados embarcado local (`sdd_database`) permitindo testes rápidos instantâneos sem necessidade de subir um container PostgreSQL externo.
+   - **CORS Global Dinâmico**: Permite conexões do frontend SPA (`http://localhost:5173`, `http://127.0.0.1:5173`).
+   - **População Automática (`DataSeeder`)**: População inicial automática de Fornecedores, Produtos e Vínculos N:N para homologação instantânea.
+   - **Banco de Dados Embarcado (SQLite / H2 File)**: Banco de dados embarcado local (`sdd_database`) sem necessidade de configurar contêineres externos.
    - **Otimização de Consultas (Anti-N+1 Queries)**: Consultas em repositório otimizadas com `JOIN FETCH` e DTO Projections para tempo de resposta < 3 segundos (RNF02).
    - **Segurança & RBAC**: Interceptor [`RbacInterceptor`](file:///c:/Users/conta/Downloads/Ferreira/TesteSddComCepein/SDDcomCepein/backend/src/main/java/com/cepein/sdd/config/RbacInterceptor.java) bloqueia operações `DELETE` sem perfil `ADMIN`.
 
 2. **Frontend SPA (React.js + Vite + Design Hallmark Anti-AI-Slop)**:
    - **Design System Polish**: Estilização Glassmorphism em Dark Mode com feedback interativo nos 8 estados (`default`, `hover`, `:focus-visible`, `:active`, `disabled`, `loading`, `error`, `success`).
+   - **Resolução Dinâmica de API**: Conecta automaticamente à API do backend resolvendo o hostname atual do navegador.
    - **Módulo de Autenticação**: Tela de login integrada com credenciais de teste padrão.
    - **Módulo de Cadastro Base**: CRUD completo de Produtos e Fornecedores com filtros de busca dinâmica por CNPJ/SKU/Nome.
    - **Módulo de Associação (Wizard)**: Assistente visual com dropdown de busca para registrar ou atualizar o vínculo N:N registrando preço e prazo.

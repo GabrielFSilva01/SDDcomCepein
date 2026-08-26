@@ -1,11 +1,12 @@
-const BASE_URL = 'http://localhost:8080/api';
+const hostname = typeof window !== 'undefined' && window.location.hostname ? window.location.hostname : 'localhost';
+const BASE_URL = `http://${hostname}:8080/api`;
 
 export const api = {
   // Fornecedores
   async getFornecedores(query = '') {
     const url = query ? `${BASE_URL}/fornecedores?query=${encodeURIComponent(query)}` : `${BASE_URL}/fornecedores`;
     const res = await fetch(url);
-    if (!res.ok) throw new Error('Erro ao buscar fornecedores');
+    if (!res.ok) throw new Error('Erro ao buscar fornecedores. Verifique se o Backend (Spring Boot na porta 8080) está rodando.');
     return res.json();
   },
 
@@ -52,7 +53,7 @@ export const api = {
   async getProdutos(query = '') {
     const url = query ? `${BASE_URL}/produtos?query=${encodeURIComponent(query)}` : `${BASE_URL}/produtos`;
     const res = await fetch(url);
-    if (!res.ok) throw new Error('Erro ao buscar produtos');
+    if (!res.ok) throw new Error('Erro ao buscar produtos. Verifique se o Backend (Spring Boot na porta 8080) está rodando.');
     return res.json();
   },
 

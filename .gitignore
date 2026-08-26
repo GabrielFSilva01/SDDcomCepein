@@ -8,6 +8,12 @@ target/
 .gradle/
 build/
 
+# Database files
+*.db
+*.mv.db
+*.h2.db
+sdd_database*
+
 # Node.js / React / Vite
 node_modules/
 dist/
