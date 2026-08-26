@@ -42,17 +42,17 @@ public class DataSeeder implements CommandLineRunner {
             // Seed Produtos
             Produto p1 = new Produto();
             p1.setNome("Monitor UltraWide 29 IPS");
-            p1.setSku("MON-UW29-IPS");
+            p1.setSkuCodigo("MON-UW29-IPS");
             p1 = produtoRepository.save(p1);
 
             Produto p2 = new Produto();
             p2.setNome("Teclado Mecânico RGB Switch Blue");
-            p2.setSku("TEC-MEC-RGB");
+            p2.setSkuCodigo("TEC-MEC-RGB");
             p2 = produtoRepository.save(p2);
 
             // Seed N:N Vínculos
             ProdutoFornecedor pf1 = new ProdutoFornecedor();
-            pf1.setId(new ProdutoFornecedorId(f1.getId(), p1.getId()));
+            pf1.setId(new ProdutoFornecedorId(f1.getIdFornecedor(), p1.getIdProduto()));
             pf1.setFornecedor(f1);
             pf1.setProduto(p1);
             pf1.setPrecoCusto(new BigDecimal("1250.00"));
@@ -60,7 +60,7 @@ public class DataSeeder implements CommandLineRunner {
             produtoFornecedorRepository.save(pf1);
 
             ProdutoFornecedor pf2 = new ProdutoFornecedor();
-            pf2.setId(new ProdutoFornecedorId(f2.getId(), p1.getId()));
+            pf2.setId(new ProdutoFornecedorId(f2.getIdFornecedor(), p1.getIdProduto()));
             pf2.setFornecedor(f2);
             pf2.setProduto(p1);
             pf2.setPrecoCusto(new BigDecimal("1190.50"));
@@ -68,7 +68,7 @@ public class DataSeeder implements CommandLineRunner {
             produtoFornecedorRepository.save(pf2);
 
             ProdutoFornecedor pf3 = new ProdutoFornecedor();
-            pf3.setId(new ProdutoFornecedorId(f1.getId(), p2.getId()));
+            pf3.setId(new ProdutoFornecedorId(f1.getIdFornecedor(), p2.getIdProduto()));
             pf3.setFornecedor(f1);
             pf3.setProduto(p2);
             pf3.setPrecoCusto(new BigDecimal("299.90"));
